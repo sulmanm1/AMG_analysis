@@ -132,11 +132,12 @@ def run(temp_dir, args):
     to_remove_vogdb = go_vog_df["target"].unique()
 
 
+    #search cyanobacteria for metabolic genes
+    go_cyanobacteria_search_dir = f"{args.output}/go_cyanobacteria_genome_search"
+    os.makedirs(go_cyanobacteria_search_dir, exist_ok=True)
+    go_cyano_genome_df = search_to_df(mmseqs_search(go_cyano_db_path, ref_cyanobacteria_genome_db, go_cyanobacteria_search_dir, f"{temp_dir}/tmp"))
 
-    go_cyano_search_dir = f"{args.output}/go_cyanobacteria_genome_search"
-    os.makedirs(go_cyano_search_dir, exist_ok=True)
-    go_cyano_genome_df = search_to_df(mmseqs_search(go_cyano_db_path, ref_cyanobacteria_genome_db, go_cyano_search_dir, f"{temp_dir}/tmp"))
-
+    #search cyanophage for metabolic genes
     go_cyanophage_search_dir = f"{args.output}/go_cyanophage_genome_search"
     os.makedirs(go_cyanophage_search_dir, exist_ok=True)
     go_cyanophage_df = search_to_df(mmseqs_search(go_cyano_db_path, ref_cyanophage_genome_db, go_cyanophage_search_dir, f"{temp_dir}/tmp"))
